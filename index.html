@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <title>Diashow Autoplay</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+    }
+
+    #imageDisplay {
+        height: 100vh;
+        width: auto;   /* Seitenverhältnis  */
+    }
+</style>
+<script>
+    console.log("Diashow gestartet");
+
+    // Array für Bilder
+    const images = [
+        'bilder/rose.jpg',
+        'bilder/tasse.jpg',
+        'bilder/blume.jpg'
+    ];
+
+    let currentImageIndex = 0;
+
+    window.onload = function() {
+        let img = document.getElementById('imageDisplay');
+        if (!img) {
+            img = document.createElement('img');
+            img.id = 'imageDisplay';
+            document.body.appendChild(img);
+        }
+
+        function showNextImage() {
+            if (images.length > 0) {
+                img.src = images[currentImageIndex];
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+            }
+        }
+
+        // startet den Wechsel-Timer
+        showNextImage();
+        setInterval(showNextImage, 3000); // Wechsel alle 3 Sekunden
+    };
+</script>
+<body>
+
+  <div>
+    <img id="imageDisplay" alt="Diashow Bild">
+  </div>
+
+</body>
+</html>
